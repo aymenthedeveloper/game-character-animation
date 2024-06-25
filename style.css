@@ -1,0 +1,81 @@
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 32px;
+  --pixel-size: 9;
+}
+.container{
+  width: calc(13.35px * var(--pixel-size));
+  height: calc(19.975px * var(--pixel-size));
+  overflow: hidden;
+}
+.container .character-sheet{
+  width: calc(53.4px * var(--pixel-size));
+  --y: 0px;
+  image-rendering: pixelated;
+  user-select: none;
+  animation: walk 1s steps(4) infinite;
+}
+.container .character-sheet.paused{
+  animation-play-state: paused;
+}
+.container .character-sheet.run{
+  animation-duration: .45s;
+}
+.container .character-sheet.goUp{
+  --y: -180px;
+}
+.container .character-sheet.goLeft{
+  --y: calc(-180px * 2);
+}
+.container .character-sheet.goRight{
+  --y: calc(-180px * 3);
+}
+.container .character-sheet.goDown{
+  --y: calc(-180px * 0);
+}
+@keyframes walk {
+  from{
+    transform: translate(0, var(--y));
+  }
+  to{
+    transform: translate(-100%, var(--y));
+  }
+}
+
+.btns{
+  display: grid;
+  width: 80vw;
+  max-width: 350px;
+  grid-template-columns: repeat(3, 1fr);
+  aspect-ratio: 2.5/1;
+  gap: 8px;
+}
+.btns button{
+ font-weight: 700; 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.btns button .arrow{
+  --size: 15px;
+  --border: 3px;
+  width: var(--size);
+  height: var(--size);
+  border-block-start: var(--border) solid black;
+  border-inline-end: var(--border) solid black;
+}
+.btns button:nth-child(2) .arrow{transform: rotate(-45deg);}
+.btns button:nth-child(4) .arrow{transform: rotate(-135deg);}
+.btns button:nth-child(5) .arrow{transform: rotate(135deg);}
+.btns button:nth-child(6) .arrow{transform: rotate(45deg);}
+@media (max-width: 300px) {
+  
+  .btns button .arrow{
+    --size: 3vw;
+  }
+}

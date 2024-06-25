@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>game animation</title>
+</head>
+<body>
+  <div class="container">
+    <img class="character-sheet" src="./spritesheet.png" alt="game character spritesheet">
+  </div>
+  <div class="btns">
+    <button>Pause</button>
+    <button><div class="arrow"></div></button>
+    <button>Run</button>
+    <button><div class="arrow"></div></button>
+    <button><div class="arrow"></div></button>
+    <button><div class="arrow"></div></button>
+  </div>
+  <script>
+    const main = document.querySelector('.container .character-sheet');
+    const playBtn = document.querySelector('.btns button:nth-child(1)');
+    const runBtn = document.querySelector('.btns button:nth-child(3)');
+    const up = document.querySelector('.btns button:nth-child(2)');
+    const left = document.querySelector('.btns button:nth-child(4)');
+    const down = document.querySelector('.btns button:nth-child(5)');
+    const right = document.querySelector('.btns button:nth-child(6)');
+    let previous;
+
+    up.addEventListener('click', () => {
+      main.classList.remove(previous)
+      main.classList.add('goUp')
+      previous = 'goUP'
+    })
+    left.addEventListener('click', () => {
+      main.classList.remove(previous)
+      main.classList.add('goLeft')
+      previous = 'goLeft'
+    })
+    right.addEventListener('click', () => {
+      main.classList.remove(previous)
+      main.classList.add('goRight')
+      previous = 'goRight'
+    })
+    down.addEventListener('click', () => {
+      main.classList.remove(previous)
+      main.classList.add('goDown')
+      previous = 'goDown'
+    })
+    playBtn.addEventListener('click', () => {
+      main.classList.toggle('paused')
+      let msg = main.classList.contains('paused')?  'Play': 'Pause';
+      playBtn.textContent = msg;
+    })
+    runBtn.addEventListener('click', () => {
+      main.classList.remove('paused')
+      playBtn.textContent = 'Pause';
+      main.classList.toggle('run')
+      let msg = main.classList.contains('run')?  'Walk': 'Run';
+      runBtn.textContent = msg;
+    })
+  </script>
+</body>
+</html>
